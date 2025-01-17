@@ -1,20 +1,30 @@
-import { Box, Heading } from '@chakra-ui/react';
-import {
-  FormBad,
-  FormGood,
-} from './hooks-examples/useEffect/bad/update-state-with-deps';
-// import { TodoList } from './hooks-examples/useEffect/good/connect-to-external-service';
+import { Box, GridItem, SimpleGrid } from '@chakra-ui/react';
+import SideBar from './components/sidebar';
+import AppRoutes from './AppRoutes';
+import NavBar from './components/navbar';
 
 function App() {
   return (
-    <Box padding={4}>
-      <Heading as={'h1'} marginBottom={4}>
-        React Hooks!
-      </Heading>
-      {/* <TodoList /> */}
-      <FormGood />
-      <FormBad />
-    </Box>
+    <SimpleGrid
+      templateAreas={{
+        base: `"navbar" "main"`,
+        lg: `"navbar navbar" "sidebar main"`,
+      }}
+      templateColumns={{ base: '1fr', lg: '200px 1fr' }}
+      spacingX={4}
+    >
+      <GridItem area={'navbar'}>
+        <NavBar />
+      </GridItem>
+      <GridItem area={'sidebar'}>
+        <SideBar />
+      </GridItem>
+      <GridItem area={'main'}>
+        <Box paddingY={2}>
+          <AppRoutes />
+        </Box>
+      </GridItem>
+    </SimpleGrid>
   );
 }
 
